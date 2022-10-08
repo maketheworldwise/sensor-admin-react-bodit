@@ -3,6 +3,7 @@ import { getThingspeak } from './Api';
 import { BsCalendarMonth } from 'react-icons/bs';
 import styles from './Graph.module.scss';
 import TempChart from './Temp';
+import HumidityChart from './Humidity';
 
 function Graph() {
   const [data, setData] = useState({});
@@ -24,11 +25,19 @@ function Graph() {
         </p>
       </div>
 
+      <ul className={styles.graph_wrap_title}>
+        <li>기온</li>
+        <li>습도</li>
+        <li>기압</li>
+      </ul>
+
       <ul className={styles.graph_wrap}>
         <li>
           <TempChart TempData={data} />
         </li>
-        <li>{/* 컴포넌트 */}</li>
+        <li>
+          <HumidityChart HumidityData={data} />
+        </li>
         <li>{/* 컴포넌트 */}</li>
       </ul>
     </div>
