@@ -14,12 +14,6 @@ function Graph() {
   //   current.getMonth() + 1
   // }/${current.getFullYear()}`;
 
-  // const [selectedDate, setSelectedDate] = useState({
-  //   year: new Date().getFullYear(),
-  //   month: new Date().getMonth(),
-  //   day: new Date().getDate(),
-  // });
-
   const selecedDate = moment(current).format('YY-MM-DD');
   const [modal, setModal] = useState(false);
 
@@ -38,8 +32,6 @@ function Graph() {
     <div className={styles.graph_container}>
       {modal && (
         <Calendar
-          // selectedDate={selectedDate}
-          // setSelectedDate={setSelectedDate}
           current={current}
           setCurrent={setCurrent}
           setModal={setModal}
@@ -47,12 +39,7 @@ function Graph() {
         />
       )}
       <div className={styles.graph_title}>
-        <h2>
-          {selecedDate}
-          {/* {selectedDate.year}/
-          {(selectedDate.month + 1).toString().padStart(2, '0')}/
-          {selectedDate.day.toString().padStart(2, '0')} */}
-        </h2>
+        <h2>{selecedDate}</h2>
         <p>
           <BsCalendarMonth onClick={clickIcon} />
         </p>
