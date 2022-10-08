@@ -1,51 +1,53 @@
 import styles from './Calendar.module.scss';
 import DetailCalendar from './DetailCalendar';
 import Calendar from 'react-calendar';
-import { useState, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { getThingspeak } from '../Graph/Api';
 import 'react-calendar/dist/Calendar.css';
 import Gragh from '../Graph/Graph.js';
 
-function CalendarPage() {
+function CalendarPage({
+  current,
+  setCurrent,
+  clickIcon,
+  // selectedDate: { day, month, year },
+  // setSelectedDate,
+  setModal,
+}) {
   const [value, onChange] = useState(new Date());
-  const [data, setData] = useState({});
-  // console.log(value);
+  const calendar = useRef(null);
 
-  const feedsData = {
-    channel: data?.feeds?.map(feed => feed.created_at),
-  };
-  console.log(feedsData);
-
-  const today = () => {
-    value.toISOString();
-  };
-  useEffect(() => {
-    getThingspeak().then(json => setData(json));
-    const feedsData = {
-      channel: data?.feeds?.map(feed => feed.created_at),
-    };
-  }, []);
-  // console.log(data);
-
-  const onClickDay = () => {
-    <Link to={`/Gragh/${feedsData.created_at}`} />;
-  };
+  console.log(value);
+  const [addMonth, setAddMonth] = useState(0);
 
   return (
-    <div className={styles.calendar_container}>
-      Calendar
+    <div
+      className={styles.calendar_container}
+      ref={calendar}
+      onClick={e => {
+        if (calendar.current === e.target) {
+          setModal(false);
+        }
+      }}
+    >
+      <button
+        onClick={() => {
+          setModal(false);
+        }}
+      >
+        X
+      </button>
       <Calendar
         calendarType="US"
-        onClickDay={onClickDay}
-        onChange={onChange}
+        onChange={e => {
+          clickIcon(e);
+        }}
         value={value}
-        onSelect={onClickDay}
+        // onClick={dateChange}
       />
-      <p className="text-center">
-        <span className="bold">Selected Date:</span>{' '}
-        {value.toString().slice(8, 10)}일
-      </p>
+      {/* <p>{value.toDateString()}</p> */}
+      <div className="text-center"></div>
       {/* <DetailCalendar date={value} DetailData={data} /> */}
     </div>
   );

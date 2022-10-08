@@ -4,13 +4,31 @@ import { BsCalendarMonth } from 'react-icons/bs';
 import styles from './Graph.module.scss';
 import TempChart from './Temp';
 import HumidityChart from './Humidity';
+import Calendar from '../Calendar/Calendar';
+import moment from 'moment';
 
 function Graph() {
   const [data, setData] = useState({});
-  const current = new Date();
-  const date = `${current.getDate()}/${
-    current.getMonth() + 1
-  }/${current.getFullYear()}`;
+  const [current, setCurrent] = useState(new Date());
+  // const date = `${current.getDate()}/${
+  //   current.getMonth() + 1
+  // }/${current.getFullYear()}`;
+
+  // const [selectedDate, setSelectedDate] = useState({
+  //   year: new Date().getFullYear(),
+  //   month: new Date().getMonth(),
+  //   day: new Date().getDate(),
+  // });
+
+  const selecedDate = moment(current).format('YY-MM-DD');
+  const [modal, setModal] = useState(false);
+
+  const clickIcon = date => {
+    setCurrent(date);
+    if (date) {
+      setModal(prev => !prev);
+    }
+  };
 
   useEffect(() => {
     getThingspeak().then(json => setData(json));
@@ -18,10 +36,25 @@ function Graph() {
 
   return (
     <div className={styles.graph_container}>
+      {modal && (
+        <Calendar
+          // selectedDate={selectedDate}
+          // setSelectedDate={setSelectedDate}
+          current={current}
+          setCurrent={setCurrent}
+          setModal={setModal}
+          clickIcon={clickIcon}
+        />
+      )}
       <div className={styles.graph_title}>
-        <p>{date}</p>
+        <h2>
+          {selecedDate}
+          {/* {selectedDate.year}/
+          {(selectedDate.month + 1).toString().padStart(2, '0')}/
+          {selectedDate.day.toString().padStart(2, '0')} */}
+        </h2>
         <p>
-          <BsCalendarMonth />
+          <BsCalendarMonth onClick={clickIcon} />
         </p>
       </div>
 
