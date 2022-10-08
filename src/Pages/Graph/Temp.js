@@ -8,7 +8,6 @@ Chart.register(...registerables, zoomPlugin);
 ChartJs.register(LineElement);
 
 function TempChart({ TempData }) {
-  // console.log(TempData);
   const data = {
     labels: TempData?.feeds?.map(x => x.created_at),
     datasets: [
@@ -32,6 +31,21 @@ function TempChart({ TempData }) {
     legend: {
       labels: {
         fontSize: 26,
+      },
+    },
+    responsive: true,
+    plugins: {
+      zoom: {
+        pan: {
+          enabled: true,
+          mode: 'x',
+        },
+        zoom: {
+          wheel: {
+            enabled: true,
+            mode: 'x',
+          },
+        },
       },
     },
   };
