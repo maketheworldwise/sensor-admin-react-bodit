@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useSortBy, useTable } from 'react-table';
+import { useSortBy, useTable, useFilters } from 'react-table'; //useFilter 추가
+// import { useGlobalFilter } from 'react-table'; //useGlobalFilter 추가
+// import GlobalFilter from '../../Components/GlobalFilter';
 import { getSensorList } from './Api';
 import { COLUMNS } from './columns';
 
@@ -17,14 +19,26 @@ function Sensor() {
       columns: columns,
       data: data,
     },
+    useFilters, //열에대한 search 기능
+    //useGlobalFilter, //테이블 전역 search 기능
     useSortBy
   );
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    tableInstance;
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+    // state, // add
+    // setGlobalFilter, // add
+  } = tableInstance;
+
+  // const { globalFilter } = state; // add
 
   return (
     <div className={styles.sensor_container}>
+      {/* <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} /> */}
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map(headerGroup => {
@@ -36,6 +50,9 @@ function Sensor() {
                       {...column.getHeaderProps(column.getSortByToggleProps())}
                     >
                       {column.render('Header')}
+                      <div>
+                        {column.canFilter ? column.render('Filter') : null}
+                      </div>
                       <span>
                         {column.isSorted
                           ? column.isSortedDesc
