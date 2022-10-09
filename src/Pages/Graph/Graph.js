@@ -4,6 +4,7 @@ import { BsCalendarMonth } from 'react-icons/bs';
 import styles from './Graph.module.scss';
 import TempChart from './Temp';
 import HumidityChart from './Humidity';
+import Pressure from './Pressure';
 
 function Graph() {
   const [data, setData] = useState({});
@@ -15,7 +16,7 @@ function Graph() {
   useEffect(() => {
     getThingspeak().then(json => setData(json));
   }, []);
-
+  console.log(data);
   return (
     <div className={styles.graph_container}>
       <div className={styles.graph_title}>
@@ -38,7 +39,9 @@ function Graph() {
         <li>
           <HumidityChart HumidityData={data} />
         </li>
-        <li>{/* 컴포넌트 */}</li>
+        <li>
+          <Pressure PressureData={data} />
+        </li>
       </ul>
     </div>
   );
