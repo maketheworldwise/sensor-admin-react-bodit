@@ -1,1 +1,10 @@
-// 센서 리스트 정보는 Mock 데이터를 활용해주세요.
+export async function getSensorList() {
+  const res = await fetch('/mocks/sensor/sensor-info-list.json', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }).catch(() => alert('통신에 실패하였습니다.'));
+
+  return res.json();
+}
