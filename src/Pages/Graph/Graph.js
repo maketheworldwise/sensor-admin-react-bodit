@@ -4,24 +4,55 @@ import { BsCalendarMonth } from 'react-icons/bs';
 import styles from './Graph.module.scss';
 import TempChart from './Temp';
 import HumidityChart from './Humidity';
+import Calendar from '../Calendar/Calendar';
+import moment from 'moment';
 
 function Graph() {
   const [data, setData] = useState({});
-  const current = new Date();
-  const date = `${current.getDate()}/${
-    current.getMonth() + 1
-  }/${current.getFullYear()}`;
+  const [current, setCurrent] = useState(new Date());
+  const [modal, setModal] = useState(false);
+  // const date = `${current.getDate()}/${
+  //   current.getMonth() + 1
+  // }/${current.getFullYear()}`;
+
+  const selecedDate = moment(current).format('YYYY-MM-DD');
+  const selecedDateNext = moment(selecedDate)
+    .add(1, 'days')
+    .format('YYYY-MM-DD');
+
+  const clickIcon = date => {
+    setCurrent(date);
+    if (date) {
+      setModal(!modal);
+    }
+  };
 
   useEffect(() => {
-    getThingspeak().then(json => setData(json));
-  }, []);
+    fetch(
+      `https://api.thingspeak.com/channels/1348864/feeds.json?api_key=6SKW0U97IPV2QQV9&start=${selecedDate}&end=${selecedDateNext}`
+    )
+      .then(res => res.json())
+      .then(json => setData(json));
+  }, [selecedDate]);
+
+  // useEffect(() => {
+  //   getThingspeak().then(json => setData(json));
+  // }, []);
 
   return (
     <div className={styles.graph_container}>
+      {modal && (
+        <Calendar
+          current={current}
+          setCurrent={setCurrent}
+          setModal={setModal}
+          clickIcon={clickIcon}
+        />
+      )}
       <div className={styles.graph_title}>
-        <p>{date}</p>
+        <h2>{selecedDate}</h2>
         <p>
-          <BsCalendarMonth />
+          <BsCalendarMonth onClick={clickIcon} />
         </p>
       </div>
 
