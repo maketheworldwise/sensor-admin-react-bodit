@@ -1,8 +1,11 @@
+import SectionFilter from '../../Components/Filter/SectionFilter';
+
 export const COLUMNS = [
   {
     Header: '#',
     id: 'index',
     accessor: (_row, i) => i + 1,
+    disableFilters: true,
   },
   {
     Header: 'Sensor ID',
@@ -11,6 +14,7 @@ export const COLUMNS = [
   {
     Header: 'Bat.(%)',
     accessor: 'shadow.batLvl',
+    Filter: SectionFilter,
   },
   {
     Header: 'Connected At',
@@ -27,6 +31,7 @@ export const COLUMNS = [
   {
     Header: 'Card No.',
     accessor: 'shadow.connCardNum',
+    Filter: SectionFilter,
   },
   {
     Header: 'Gateway',

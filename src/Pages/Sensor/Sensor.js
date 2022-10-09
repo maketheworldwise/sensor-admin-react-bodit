@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useSortBy, useTable } from 'react-table';
+import { useSortBy, useTable, useFilters } from 'react-table'; //useFilter 추가
+import ColumnFilter from '../../Components/Filter/ColumnFilter';
 import { getSensorList } from './Api';
 import { COLUMNS } from './columns';
 
@@ -7,6 +8,13 @@ import styles from './Sensor.module.scss';
 
 function Sensor() {
   const columns = useMemo(() => COLUMNS, []);
+
+  const defaultFilterColumn = useMemo(() => {
+    return {
+      Filter: ColumnFilter,
+    };
+  }, []);
+
   const [data, setData] = useState([]);
   useEffect(() => {
     getSensorList().then(json => setData(json));
@@ -16,7 +24,9 @@ function Sensor() {
     {
       columns: columns,
       data: data,
+      defaultColumn: defaultFilterColumn,
     },
+    useFilters, //열에대한 search 기능
     useSortBy
   );
 
@@ -25,6 +35,8 @@ function Sensor() {
 
   return (
     <div className={styles.sensor_container}>
+      사용법 : 각 열의 Header 클릭시 자동정렬
+      {/* <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} /> */}
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map(headerGroup => {
@@ -36,6 +48,9 @@ function Sensor() {
                       {...column.getHeaderProps(column.getSortByToggleProps())}
                     >
                       {column.render('Header')}
+                      <div>
+                        {column.canFilter ? column.render('Filter') : null}
+                      </div>
                       <span>
                         {column.isSorted
                           ? column.isSortedDesc
