@@ -1,70 +1,61 @@
-import ColumnFilter from '../../Components/Filter/ColumnFilter';
+import SectionFilter from '../../Components/Filter/SectionFilter';
 
 export const COLUMNS = [
   {
     Header: '#',
     id: 'index',
     accessor: (_row, i) => i + 1,
-    Filter: ColumnFilter,
+    disableFilters: true,
   },
   {
     Header: 'Sensor ID',
     accessor: 'thingName',
-    Filter: ColumnFilter,
   },
   {
     Header: 'Bat.(%)',
     accessor: 'shadow.batLvl',
-    Filter: ColumnFilter,
+    Filter: SectionFilter,
   },
   {
     Header: 'Connected At',
     accessor: 'shadow.connAt',
-    Filter: ColumnFilter,
   },
   {
     Header: 'Disconnected At',
-    accessor: 'shadow.disconnAt',
-    Filter: ColumnFilter,
+    accessor:
+      'shadow.disconnAt' === null ? 'disconnected yet' : 'shadow.disconnAt',
   },
   {
     Header: 'Reason',
     accessor: 'shadow.disconnReason',
-    Filter: ColumnFilter,
   },
   {
     Header: 'Card No.',
     accessor: 'shadow.connCardNum',
-    Filter: ColumnFilter,
+    Filter: SectionFilter,
   },
   {
     Header: 'Gateway',
     accessor: 'shadow.connGW',
-    Filter: ColumnFilter,
   },
   {
     Header: 'Raw sent',
     accessor: 'shadow.rawSentCnt',
-    Filter: ColumnFilter,
   },
   {
     Header: 'Remain',
     accessor: 'shadow.remainData',
-    Filter: ColumnFilter,
   },
   {
     Header: 'RSSI',
     accessor: 'shadow.rssi',
-    Filter: ColumnFilter,
   },
   {
     Header: 'F/W ver.',
     accessor: 'shadow.hwVer',
-    Filter: ColumnFilter,
   },
   {
     Header: 'H/W ver.',
     accessor: 'shadow.fwVer',
-    Filter: ColumnFilter,
   },
 ];

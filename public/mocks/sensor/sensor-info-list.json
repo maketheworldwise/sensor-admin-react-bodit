@@ -22,7 +22,7 @@
       "fwVer": "1.0.0",
       "batLvl": 60,
       "connAt": "2022-09-07 13:46:49",
-      "disconnAt": "2022-09-07 13:47:06",
+      "disconnAt": null,
       "disconnReason": 19,
       "rawSentCnt": 11,
       "connGW": "GW-100007",
