@@ -22,8 +22,7 @@ export const COLUMNS = [
   },
   {
     Header: 'Disconnected At',
-    accessor:
-      'shadow.disconnAt' === null ? 'disconnected yet' : 'shadow.disconnAt',
+    accessor: 'shadow.disconnAt',
   },
   {
     Header: 'Reason',
