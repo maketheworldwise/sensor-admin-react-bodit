@@ -4,6 +4,7 @@ import { BsCalendarMonth } from 'react-icons/bs';
 import styles from './Graph.module.scss';
 import TempChart from './Temp';
 import HumidityChart from './Humidity';
+import Pressure from './Pressure';
 import Calendar from '../Calendar/Calendar';
 import moment from 'moment';
 
@@ -28,6 +29,8 @@ function Graph() {
   };
 
   useEffect(() => {
+    getThingspeak().then(json => setData(json));
+    console.log(data);
     fetch(
       `https://api.thingspeak.com/channels/1348864/feeds.json?api_key=6SKW0U97IPV2QQV9&start=${selecedDate}&end=${selecedDateNext}`
     )
@@ -69,7 +72,9 @@ function Graph() {
         <li>
           <HumidityChart HumidityData={data} />
         </li>
-        <li>{/* 컴포넌트 */}</li>
+        <li>
+          <Pressure PressureData={data} />
+        </li>
       </ul>
     </div>
   );
