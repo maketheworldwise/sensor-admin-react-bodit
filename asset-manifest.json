@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/sensor-admin-react-bodit/static/css/main.a7b39c0c.css",
-    "main.js": "/sensor-admin-react-bodit/static/js/main.bdc44e8e.js",
+    "main.js": "/sensor-admin-react-bodit/static/js/main.16224e47.js",
     "index.html": "/sensor-admin-react-bodit/index.html",
     "main.a7b39c0c.css.map": "/sensor-admin-react-bodit/static/css/main.a7b39c0c.css.map",
-    "main.bdc44e8e.js.map": "/sensor-admin-react-bodit/static/js/main.bdc44e8e.js.map"
+    "main.16224e47.js.map": "/sensor-admin-react-bodit/static/js/main.16224e47.js.map"
   },
   "entrypoints": [
     "static/css/main.a7b39c0c.css",
-    "static/js/main.bdc44e8e.js"
+    "static/js/main.16224e47.js"
   ]
 }
