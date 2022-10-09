@@ -8,7 +8,6 @@ Chart.register(...registerables, zoomPlugin);
 ChartJs.register(LineElement);
 
 function TempChart({ TempData }) {
-  // console.log(TempData);
   const data = {
     labels: TempData?.feeds?.map(x => x.created_at),
     datasets: [

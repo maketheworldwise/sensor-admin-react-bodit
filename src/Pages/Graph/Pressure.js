@@ -38,20 +38,6 @@ const PressureChart = ({ PressureData }) => {
         fontSize: 26,
       },
     },
-
-    // scales: {
-    // axis: 'y', // x축(가로축)인지 y축(세로축)인지 표시합니다.
-    // max: '100',
-    // min: '10',
-    // position: 'top',
-    // ticks: {
-    //   beginAtZero: false,
-    //   steps: 10,
-    //   stepValue: 5,
-    //   min: 1000,
-    //   max: 1200,
-    // },
-    // },
   };
 
   return (

@@ -12,9 +12,6 @@ function Graph() {
   const [data, setData] = useState({});
   const [current, setCurrent] = useState(new Date());
   const [modal, setModal] = useState(false);
-  // const date = `${current.getDate()}/${
-  //   current.getMonth() + 1
-  // }/${current.getFullYear()}`;
 
   const selecedDate = moment(current).format('YYYY-MM-DD');
   const selecedDateNext = moment(selecedDate)
@@ -29,18 +26,8 @@ function Graph() {
   };
 
   useEffect(() => {
-    getThingspeak().then(json => setData(json));
-    console.log(data);
-    fetch(
-      `https://api.thingspeak.com/channels/1348864/feeds.json?api_key=6SKW0U97IPV2QQV9&start=${selecedDate}&end=${selecedDateNext}`
-    )
-      .then(res => res.json())
-      .then(json => setData(json));
+    getThingspeak(selecedDate, selecedDateNext).then(json => setData(json));
   }, [selecedDate]);
-
-  // useEffect(() => {
-  //   getThingspeak().then(json => setData(json));
-  // }, []);
 
   return (
     <div className={styles.graph_container}>

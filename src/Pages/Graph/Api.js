@@ -1,8 +1,8 @@
 import { BASE_URL, CHANNEL_ID, API_KEY } from '../../config.js';
 
-export async function getThingspeak() {
+export async function getThingspeak(startDate, endDate) {
   const res = await fetch(
-    `${BASE_URL}/${CHANNEL_ID}/feeds.json?api_key=${API_KEY}`,
+    `${BASE_URL}/${CHANNEL_ID}/feeds.json?api_key=${API_KEY}&start=${startDate}&end=${endDate}`,
     {
       method: 'GET',
       headers: {
